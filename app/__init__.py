@@ -15,9 +15,12 @@ def create_app(test_config=None):
     if test_config:
         app.config.from_mapping(test_config)
 
-    # ONLY initialize Supabase if we are NOT testing
     if not app.config.get("TESTING"):
         init_supabase()
+
+    # --- Register Blueprint ---
+    from app.routes import bp
+    app.register_blueprint(bp)
 
     @app.route("/health")
     def health_check():

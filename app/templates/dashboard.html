@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Hello, {{ user.name if user else 'Friend' }}!</h2>
+    <p>You are now registered. You will receive emails randomly.</p>
+    <p><small>Email: {{ user.email }}</small></p>
+{% endblock %}

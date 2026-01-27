@@ -1,17 +1,75 @@
 # Friend 💌
 
-A minimal, production-minded web service where users register to receive short, warm, personalized emails at infrequent, random intervals.
+**Friend** is a minimal, warm web service. Users register to receive short, personalized, AI-generated emails at infrequent, random intervals. It is designed to feel like a message from a caring friend, not a robot.
 
-## Architecture
-Built with Python 3.11, Flask, PostgreSQL, and AI-driven text generation.
+## 🏗 Architecture
 
-## Setup
-1. Copy `.env.example` to `.env`.
-2. Run `poetry install`.
-3. Run `poetry run flask run`.
+*   **Language:** Python 3.11+
+*   **Framework:** Flask (Blueprints, Application Factory)
+*   **Database:** PostgreSQL (via Supabase API)
+*   **Auth:** Supabase Authentication
+*   **AI:** Together.ai (LLM for text generation)
+*   **Dependency Management:** Poetry
 
-## Chapters
+## 🚀 Setup & Installation
+
+### 1. Prerequisites
+*   Python 3.11 or higher
+*   Poetry (`pip install poetry`)
+*   A free [Supabase](https://supabase.com) account
+
+### 2. Installation
+```bash
+git clone <your-repo-url>
+cd Friend
+poetry install
+```
+
+### 3. Environment Variables
+Create a `.env` file in the root directory:
+```ini
+FLASK_APP=app
+FLASK_ENV=development
+FLASK_SECRET_KEY=change_this_to_something_secure
+
+# Supabase Configuration
+SUPABASE_URL=https://your-project-id.supabase.co
+SUPABASE_KEY=your-service-role-key
+```
+
+### 4. Running Locally
+```bash
+poetry run flask run
+```
+Visit `http://127.0.0.1:5000` to see the app.
+
+### 5. Running Tests
+```bash
+poetry run pytest
+```
+
+## 📚 Project Chapters
+
 This project is built in modular chapters.
-- [x] Chapter 01: Setup & Architecture
-- [ ] Chapter 02: Database & Models
-... (will update as we progress)
+
+- [x] **Chapter 01: Setup & Architecture**
+    - Established Poetry environment, Flask factory pattern, and CI/CD skeleton.
+- [x] **Chapter 02: Database (Supabase API)**
+    - Integrated Supabase Python client.
+    - Created `users_profile` and `email_logs` tables.
+    - Implemented `UserService` for data operations.
+- [x] **Chapter 03: Authentication & UI**
+    - Integrated Supabase Auth for secure signup/login.
+    - Built Flask Blueprints and Jinja2 templates (Register, Login, Dashboard).
+    - Implemented session management.
+- [ ] **Chapter 04: Core API (AI Message Generation)**
+- [ ] **Chapter 05: Email Delivery**
+- [ ] **Chapter 06: Scheduling & Logic**
+- [ ] **Chapter 07: Observability & Security**
+- [ ] **Chapter 08: Deployment**
+
+## 🤝 Contributing
+1. Fork the repo.
+2. Create a branch (`git checkout -b feature-name`).
+3. Commit changes (`git commit -m "feat: add something"`).
+4. Push to branch and open a PR.

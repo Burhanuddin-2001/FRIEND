@@ -8,7 +8,7 @@
 *   **Framework:** Flask (Blueprints, Application Factory)
 *   **Database:** PostgreSQL (via Supabase API)
 *   **Auth:** Supabase Authentication
-*   **AI:** Together.ai (LLM for text generation)
+*   **AI:** Priyanshu API (Custom Model)
 *   **Dependency Management:** Poetry
 
 ## 🚀 Setup & Installation
@@ -17,6 +17,7 @@
 *   Python 3.11 or higher
 *   Poetry (`pip install poetry`)
 *   A free [Supabase](https://supabase.com) account
+*   A free [Priyanshu API](https://priyanshuapi.xyz/) account
 
 ### 2. Installation
 ```bash
@@ -35,6 +36,9 @@ FLASK_SECRET_KEY=change_this_to_something_secure
 # Supabase Configuration
 SUPABASE_URL=https://your-project-id.supabase.co
 SUPABASE_KEY=your-service-role-key
+
+# AI Configuration (Priyanshu API)
+API_KEY=your-aiml-api-key
 ```
 
 ### 4. Running Locally
@@ -62,11 +66,11 @@ This project is built in modular chapters.
     - Integrated Supabase Auth for secure signup/login.
     - Built Flask Blueprints and Jinja2 templates (Register, Login, Dashboard).
     - Implemented session management.
-- [ ] **Chapter 04: Core API (AI Message Generation)**
-- [ ] **Chapter 05: Email Delivery**
-- [ ] **Chapter 06: Scheduling & Logic**
-- [ ] **Chapter 07: Observability & Security**
-- [ ] **Chapter 08: Deployment**
+- [x] **Chapter 04: Core API (AI Message Generation)**
+    - Integrated Priyanshu API (Custom LLM Wrapper).
+    - Implemented `AIService` using Python `requests`.
+    - Added "Test AI" button to Dashboard.
+    - Enforced strict persona prompting.
 
 ## 🤝 Contributing
 1. Fork the repo.

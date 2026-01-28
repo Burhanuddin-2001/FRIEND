@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from app.services import UserService
+from app.services import UserService, AIService
 
 # Define the Blueprint
 bp = Blueprint("main", __name__)
@@ -45,7 +45,7 @@ def login():
 
     return render_template("login.html")
 
-@bp.route("/dashboard")
+@bp.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
     if "user_id" not in session:
         flash("Please log in first.", "warning")
@@ -53,7 +53,15 @@ def dashboard():
 
     # Fetch profile data
     profile = UserService.get_profile(session["user_id"])
-    return render_template("dashboard.html", user=profile)
+    
+    generated_message = None
+    
+    # Handle the "Generate Sample Message" button click
+    if request.method == "POST":
+        name = profile.get("name") if profile else "Friend"
+        generated_message = AIService.generate_message(name)
+
+    return render_template("dashboard.html", user=profile, message=generated_message)
 
 @bp.route("/logout")
 def logout():

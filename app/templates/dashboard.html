@@ -3,4 +3,19 @@
     <h2>Hello, {{ user.name if user else 'Friend' }}!</h2>
     <p>You are now registered. You will receive emails randomly.</p>
     <p><small>Email: {{ user.email }}</small></p>
+
+    <hr>
+    
+    <h3>🔮 Admin / Debug Zone</h3>
+    <p>Test the AI generation engine:</p>
+    <form method="post">
+        <button type="submit">Generate Sample Message</button>
+    </form>
+
+    {% if message %}
+        <div style="background: #f9f9f9; padding: 1rem; margin-top: 1rem; border-left: 4px solid #333;">
+            <strong>AI Output:</strong><br>
+            <p style="white-space: pre-wrap;">{{ message }}</p>
+        </div>
+    {% endif %}
 {% endblock %}

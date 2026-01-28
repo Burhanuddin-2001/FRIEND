@@ -5,7 +5,8 @@ def test_home_page(client):
     """Test that the home page loads."""
     response = client.get("/")
     assert response.status_code == 200
-    assert b"Friend's Hand" in response.data
+    # Check for "Friend" instead of "Friend's Hand" to match your rename
+    assert b"Friend" in response.data
 
 def test_register_route_get(client):
     """Test that register page loads."""

@@ -7,9 +7,15 @@
     <hr>
     
     <h3>🔮 Admin / Debug Zone</h3>
-    <p>Test the AI generation engine:</p>
-    <form method="post">
-        <button type="submit">Generate Sample Message</button>
+    
+    <form method="post" style="display: flex; gap: 10px;">
+        <button type="submit" name="action" value="generate">1. Generate Message</button>
+        
+        {% if message %}
+            <button type="submit" name="action" value="send_test" style="background-color: #28a745; color: white; border: none;">
+                2. Send to Me
+            </button>
+        {% endif %}
     </form>
 
     {% if message %}

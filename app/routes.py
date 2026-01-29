@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from app.services import UserService, AIService
+from app.services import UserService, AIService, EmailService # <--- Import EmailService
 
 # Define the Blueprint
 bp = Blueprint("main", __name__)
@@ -51,15 +52,43 @@ def dashboard():
         flash("Please log in first.", "warning")
         return redirect(url_for("main.login"))
 
-    # Fetch profile data
     profile = UserService.get_profile(session["user_id"])
     
     generated_message = None
     
-    # Handle the "Generate Sample Message" button click
     if request.method == "POST":
-        name = profile.get("name") if profile else "Friend"
-        generated_message = AIService.generate_message(name)
+        action = request.form.get("action")
+        
+        if action == "generate":
+            # Generate AI Message
+            name = profile.get("name") if profile else "Friend"
+            generated_message = AIService.generate_message(name)
+            
+            # Store in session so we can send it in the next step if we want
+            session["last_message"] = generated_message
+            
+        elif action == "send_test":
+            # Send the last generated message to the logged-in user
+            message_body = session.get("last_message")
+            if message_body:
+                # Wrap it in simple HTML
+                html_content = f"<p>{message_body}</p><br><p><small>Sent by Friend.</small></p>"
+                
+                success = EmailService.send_email(
+                    to_email=profile["email"],
+                    subject="Just thinking of you",
+                    body_html=html_content,
+                    user_id=session["user_id"]
+                )
+                
+                if success:
+                    flash("Email sent! Check your inbox.", "success")
+                else:
+                    flash("Failed to send email.", "error")
+            else:
+                flash("Generate a message first!", "warning")
+                
+            generated_message = message_body
 
     return render_template("dashboard.html", user=profile, message=generated_message)
 

@@ -8,7 +8,8 @@
 *   **Framework:** Flask (Blueprints, Application Factory)
 *   **Database:** PostgreSQL (via Supabase API)
 *   **Auth:** Supabase Authentication
-*   **AI:** Priyanshu API (Custom Model)
+*   **AI:** Priyanshu API (Custom LLM Wrapper)
+*   **Email:** Resend API
 *   **Dependency Management:** Poetry
 
 ## 🚀 Setup & Installation
@@ -16,8 +17,7 @@
 ### 1. Prerequisites
 *   Python 3.11 or higher
 *   Poetry (`pip install poetry`)
-*   A free [Supabase](https://supabase.com) account
-*   A free [Priyanshu API](https://priyanshuapi.xyz/) account
+*   Free accounts for: [Supabase](https://supabase.com), [Resend](https://resend.com), and [Priyanshu API](https://priyanshuapi.xyz).
 
 ### 2. Installation
 ```bash
@@ -37,8 +37,12 @@ FLASK_SECRET_KEY=change_this_to_something_secure
 SUPABASE_URL=https://your-project-id.supabase.co
 SUPABASE_KEY=your-service-role-key
 
-# AI Configuration (Priyanshu API)
-API_KEY=your-aiml-api-key
+# AI Configuration
+PRIYANSHU_API_KEY=your-api-key
+
+# Email Configuration
+RESEND_API_KEY=re_123...
+FROM_EMAIL=onboarding@resend.dev
 ```
 
 ### 4. Running Locally
@@ -67,10 +71,16 @@ This project is built in modular chapters.
     - Built Flask Blueprints and Jinja2 templates (Register, Login, Dashboard).
     - Implemented session management.
 - [x] **Chapter 04: Core API (AI Message Generation)**
-    - Integrated Priyanshu API (Custom LLM Wrapper).
-    - Implemented `AIService` using Python `requests`.
+    - Integrated Priyanshu API using Python `requests`.
+    - Implemented `AIService` with strict persona prompting and output sanitization.
     - Added "Test AI" button to Dashboard.
-    - Enforced strict persona prompting.
+- [x] **Chapter 05: Email Delivery**
+    - Integrated Resend API.
+    - Implemented `EmailService` to send HTML emails and log results to Supabase.
+    - Added "Send to Me" feature in Dashboard.
+- [ ] **Chapter 06: Scheduling & Logic**
+- [ ] **Chapter 07: Observability & Security**
+- [ ] **Chapter 08: Deployment**
 
 ## 🤝 Contributing
 1. Fork the repo.
